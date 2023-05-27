@@ -9,7 +9,7 @@ interface UserState {
 
 const initialState: UserState = {
   user: null,
-  isLoading: false,
+  isLoading: true,
   error: "",
 };
 
@@ -17,13 +17,23 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    userIsFetching: (state) => {
+      state.isLoading = true;
+    },
     setUser: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
       state.isLoading = false;
     },
+
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.isLoading = false;
+    },
+    setLoadingFalse: (state) => {
+      state.isLoading = false;
+    },
+    removeUser: (state) => {
+      state.user = null;
     },
   },
 });

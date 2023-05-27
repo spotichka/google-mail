@@ -6,8 +6,12 @@ export const mailAPI = createApi({
   reducerPath: "mailAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://gmail.googleapis.com/gmail/v1/",
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    prepareHeaders: (headers) => {
+      headers.append(
+        "Authorization",
+        `Bearer ${localStorage.getItem("token")}`
+      );
+      return headers;
     },
   }),
   tagTypes: ["messages"],

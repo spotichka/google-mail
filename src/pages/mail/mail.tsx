@@ -6,7 +6,7 @@ const Mail = () => {
   const { user } = useAppSelector((state) => state.userReducer);
   const { data, isLoading } = mailAPI.useGetLabelsQuery(user?.id);
 
-  if (isLoading) {
+  if (isLoading || !user?.id) {
     return <div>Loading</div>;
   }
 

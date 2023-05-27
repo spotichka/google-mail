@@ -1,10 +1,10 @@
 import { RouteObject } from "react-router-dom";
-import App from "../../App.tsx";
+import LoginPage from "../../pages/login-page/LoginPage.tsx";
 
 const notAuthRoutes: RouteObject[] = [
   {
     path: "/",
-    element: <App />,
+    element: <LoginPage />,
   },
 ];
 
