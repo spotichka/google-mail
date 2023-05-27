@@ -22,7 +22,6 @@ const Mail = () => {
           ))}
       </div>
       <div>
-        outlet
         <Outlet />
       </div>
     </div>
