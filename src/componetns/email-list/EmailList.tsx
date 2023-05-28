@@ -1,8 +1,8 @@
 import { useAppSelector } from "../../hooks/redux.ts";
 import { useParams } from "react-router-dom";
-import { useGetMailsQuery } from "../../api/mail-api.ts";
+import { mailAPI, useGetMailsQuery } from "../../api/mail-api.ts";
 import EmailPreview from "../email-preview/EmailPreview.tsx";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button, List, Typography } from "antd";
 import s from "./styles.module.css";
 import {
@@ -22,6 +22,7 @@ const EmailList = () => {
     label: label as string,
     nextPageToken: pageToken,
   });
+  const { data: labelsList } = mailAPI.useGetLabelsQuery(user?.id);
 
   const handleChangePage = () => {
     if (data?.nextPageToken) {
@@ -43,10 +44,15 @@ const EmailList = () => {
     setPageTokensArr([""]);
   }, [label]);
 
+  const labelName = useMemo(
+    () => labelsList?.labels.find((item) => item.id === label)?.name,
+    [label]
+  );
+
   return (
     <div className={s.wrapper}>
       <div className={s.header}>
-        <Title level={2}>Your inbox</Title>
+        <Title level={2}>{labelName}:</Title>
         <nav className={s.nav}>
           <Button
             type={"primary"}
@@ -82,7 +88,7 @@ const EmailList = () => {
           )}
         />
       )}
-      {!data?.messages && <div>No letter here</div>}
+      {!data?.messages && <Title level={5}>No letter here</Title>}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { mailAPI } from "../../api/mail-api";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux.ts";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
 import { Button, Layout, Menu, Typography } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { googleLogout } from "@react-oauth/google";
@@ -12,10 +12,11 @@ const { Content, Footer, Sider } = Layout;
 const { Title, Text } = Typography;
 const Mail = () => {
   const { label } = useParams<{ label: string }>();
+  const isMatch = useMatch("/mail/:label");
+  const navigate = useNavigate();
   const { user } = useAppSelector((state) => state.userReducer);
   const { data, isLoading } = mailAPI.useGetLabelsQuery(user?.id);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleMenuSelect = ({ key }: { key: string }) => {
     navigate(`/mail/${key}`);
@@ -84,7 +85,13 @@ const Mail = () => {
       </Sider>
       <Layout className="site-layout" style={{ marginLeft: 300 }}>
         <Content>
-          <Outlet />
+          {isMatch ? (
+            <Outlet />
+          ) : (
+            <Title level={3} className={s.noLabel}>
+              Select folder to view letters
+            </Title>
+          )}
         </Content>
         <Footer style={{ textAlign: "center" }}>
           <Text>©2023 Created by Valentyn Poslavskyi</Text>
