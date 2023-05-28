@@ -1,0 +1,14 @@
+.aside {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+}
+.logoutNav {
+    display: flex;
+    margin: auto 20px 0 20px;
+    gap: 16px;
+    align-items: center;
+
+}

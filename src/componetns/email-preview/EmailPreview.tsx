@@ -1,10 +1,13 @@
-import { useGetMailQuery } from "../../api/mail-api.ts";
-import { useAppSelector } from "../../hooks/redux.ts";
-import * as dayjs from "dayjs";
 import { useState } from "react";
 import CustomModal from "../modal/modal.tsx";
 import EmailPreviewBody from "../email-peview-body/EmailPreview.tsx";
 import { getEmailHeadersValue } from "../../helpers.ts";
+import * as dayjs from "dayjs";
+import { useGetMailQuery } from "../../api/mail-api.ts";
+import { useAppSelector } from "../../hooks/redux.ts";
+import { Skeleton } from "antd";
+import { EyeOutlined, FieldTimeOutlined } from "@ant-design/icons";
+import s from "./styles.module.css";
 
 type EmailPreviewPropsT = {
   message: IEmailListItem;
@@ -18,21 +21,26 @@ const EmailPreview = ({ message }: EmailPreviewPropsT) => {
   });
 
   if (isLoading || !data) {
-    return <div>Loading</div>;
+    return <Skeleton />;
   }
 
   return (
     <>
-      <div onClick={() => setIsPreviewModalShown(true)}>
-        {data && getEmailHeadersValue(data.payload.headers, "Subject")}
-        {dayjs(+data.internalDate).format("DD-MM-YYYY")}
-        <CustomModal
-          setModalShown={setIsPreviewModalShown}
-          isShown={isPreviewModalShown}
-        >
-          <EmailPreviewBody emailData={data} />
-        </CustomModal>
+      <div onClick={() => setIsPreviewModalShown(true)} className={s.wrapper}>
+        <div className={s.label}>
+          <EyeOutlined />
+          {data && getEmailHeadersValue(data.payload.headers, "Subject")}
+        </div>
+        <div className={s.label}>
+          <FieldTimeOutlined /> {dayjs(+data.internalDate).format("DD-MM-YYYY")}
+        </div>
       </div>
+      <CustomModal
+        setModalShown={setIsPreviewModalShown}
+        isShown={isPreviewModalShown}
+      >
+        <EmailPreviewBody emailData={data} />
+      </CustomModal>
     </>
   );
 };

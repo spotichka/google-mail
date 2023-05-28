@@ -1,4 +1,4 @@
-.layout__modal {
+.layoutModal {
   position:fixed;
   top: 0;
   left: 0;
@@ -15,7 +15,7 @@
 }
 .modal{
   background: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 4px;
   position: absolute;
 }
 

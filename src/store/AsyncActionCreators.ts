@@ -4,7 +4,8 @@ import { userSlice } from "./reducers/userSlice.ts";
 
 export const fetchUser = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(userSlice.actions.userIsFetching);
+    dispatch(userSlice.actions.userIsFetching());
+
     const {
       data,
     }: AxiosResponse<{
@@ -14,6 +15,7 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
     }> = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
+
     dispatch(
       userSlice.actions.setUser({
         id: data.sub,
@@ -22,7 +24,6 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
       })
     );
   } catch (e: any) {
-    console.log(e);
     if (e?.response?.status === 401) {
       dispatch(userSlice.actions.setError("Auth error"));
       return;

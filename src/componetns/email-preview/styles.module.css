@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 0;
+    cursor: pointer;
+}
+.label {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}

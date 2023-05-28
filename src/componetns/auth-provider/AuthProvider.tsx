@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux.ts";
 import { fetchUser } from "../../store/AsyncActionCreators.ts";
 import { useGoogleLogin } from "@react-oauth/google";
+import Loader from "../loader/Loader.tsx";
 import { userSlice } from "../../store/reducers/userSlice.ts";
 import * as React from "react";
 
@@ -35,7 +36,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [error]);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   return <>{children}</>;

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
-import styles from "./styles.module.css";
+import { useOnClickOutside } from "../../hooks/useOnClickOutside.ts";
+import { CloseCircleOutlined } from "@ant-design/icons";
+import s from "./styles.module.css";
 
 const CustomModal = ({
   isShown,
@@ -15,12 +17,12 @@ const CustomModal = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const squareBoxRef = useRef<HTMLDivElement>(null);
 
-  // useOnClickOutside(squareBoxRef, (e: any) => {
-  //   if (!e.path.includes(modalRef.current)) {
-  //     return;
-  //   }
-  //   setModalShown(false);
-  // });
+  useOnClickOutside(squareBoxRef, (e: any) => {
+    if (!e.composedPath().includes(modalRef.current)) {
+      return;
+    }
+    setModalShown(false);
+  });
   useEffect(() => {
     if (isShown && modalRootElement) {
       modalRootElement.appendChild(element);
@@ -37,16 +39,16 @@ const CustomModal = ({
   return createPortal(
     <>
       {isShown && (
-        <div className={styles.layout__modal} ref={modalRef} key={"modal"}>
-          <div ref={squareBoxRef} className={styles.modal}>
+        <div className={s.layoutModal} ref={modalRef} key={"modal"}>
+          <div ref={squareBoxRef} className={s.modal}>
             <div
-              className={styles.close}
+              className={s.close}
               onClick={(e) => {
                 e.stopPropagation();
                 setModalShown(false);
               }}
             >
-              X
+              <CloseCircleOutlined height={24} width={24} />
             </div>
             {children}
           </div>
