@@ -19,13 +19,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     onError: () => dispatch(userSlice.actions.setError),
     scope: "https://mail.google.com/",
   });
-  // const [isAuthStarted, setIsAuthStarted] = useState(!!token);
 
   useEffect(() => {
     if (token) {
       dispatch(fetchUser());
     } else {
-      dispatch(userSlice.actions.setLoadingFalse());
+      dispatch(userSlice.actions.setIsLoading(false));
     }
   }, []);
   useEffect(() => {

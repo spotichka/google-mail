@@ -1,10 +1,10 @@
-import { mailAPI } from "../../api/mail-api";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux.ts";
 import { Outlet, useMatch, useNavigate, useParams } from "react-router-dom";
-import { Button, Layout, Menu, Typography } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
 import { googleLogout } from "@react-oauth/google";
 import Loader from "../../componetns/loader/Loader.tsx";
+import { mailAPI } from "../../api/mail-api";
+import { Button, Layout, Menu, Typography } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
 import { userSlice } from "../../store/reducers/userSlice.ts";
 import s from "./styles.module.css";
 
@@ -53,7 +53,7 @@ const Mail = () => {
         }}
       >
         <div className={s.aside}>
-          <Title level={5} style={{ color: "white", marginLeft: "20px" }}>
+          <Title level={5} style={{ color: "white", margin: "20px 0 0 20px" }}>
             Your folders
           </Title>
           {data?.labels && (

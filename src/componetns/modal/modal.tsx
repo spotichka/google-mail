@@ -3,13 +3,14 @@ import { createPortal } from "react-dom";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside.ts";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import s from "./styles.module.css";
+import * as React from "react";
 
 const CustomModal = ({
   isShown,
   setModalShown,
   children,
 }: {
-  children: any;
+  children: React.ReactNode;
   setModalShown: (isShown: boolean) => void;
   isShown: boolean;
 }) => {

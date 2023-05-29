@@ -17,8 +17,8 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    userIsFetching: (state) => {
-      state.isLoading = true;
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
     },
     setUser: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
@@ -29,9 +29,7 @@ export const userSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
-    setLoadingFalse: (state) => {
-      state.isLoading = false;
-    },
+
     removeUser: (state) => {
       state.user = null;
     },

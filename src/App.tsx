@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import routes from "./router/routes.tsx";
 import { useAppSelector } from "./hooks/redux.ts";
 import Loader from "./componetns/loader/Loader.tsx";
+import "antd/dist/reset.css";
+
 const router = createBrowserRouter(routes);
 function App() {
   const { isLoading } = useAppSelector((state) => state.userReducer);

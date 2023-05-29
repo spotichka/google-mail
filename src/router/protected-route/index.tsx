@@ -1,11 +1,12 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux.ts";
+import * as React from "react";
 
 const ProtectedRoute = ({
   children,
   requireAuth,
 }: {
-  children: any;
+  children: React.ReactNode;
   requireAuth: boolean;
 }) => {
   const { user } = useAppSelector((state) => state.userReducer);
@@ -19,7 +20,7 @@ const ProtectedRoute = ({
     return <Navigate to={"/"} state={{ from: location }} replace />;
   }
 
-  return children;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;

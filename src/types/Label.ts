@@ -1,8 +1,8 @@
 export interface ILabelsResponse {
-  labels: ILabel[];
+  labels: Label[];
 }
 
-export interface ILabel {
+export interface Label {
   id: string;
   name: string;
   messageListVisibility: string;

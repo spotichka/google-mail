@@ -1,11 +1,10 @@
 import axios, { AxiosResponse } from "axios";
-import { AppDispatch } from "../types/store_types.ts";
+import { AppDispatch } from "../types/StoreTypes.ts";
 import { userSlice } from "./reducers/userSlice.ts";
 
 export const fetchUser = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(userSlice.actions.userIsFetching());
-
+    dispatch(userSlice.actions.setIsLoading(true));
     const {
       data,
     }: AxiosResponse<{

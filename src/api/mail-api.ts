@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { ILabelsResponse } from "../types/ILabel.ts";
+import { ILabelsResponse } from "../types/Label.ts";
 import { IMessageResponse } from "../types/MessageItem.ts";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
 import type {
