@@ -13,6 +13,7 @@ const routes: RouteObject[] = [
       </ProtectedRoute>
     ),
     children: authRoutes,
+    path: "/mail",
   },
   {
     element: (

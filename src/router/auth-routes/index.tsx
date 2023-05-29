@@ -3,10 +3,6 @@ import EmailList from "../../componetns/email-list/EmailList.tsx";
 
 const authRoutes: RouteObject[] = [
   {
-    path: "/mail",
-    element: "",
-  },
-  {
     path: "/mail/:label",
     element: <EmailList />,
   },
